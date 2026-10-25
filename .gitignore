@@ -4,3 +4,8 @@ local.properties
 .idea/
 build/
 .DS_Store
+.env
+data/
+__pycache__/
+*.egg-info/
+.pytest_cache/

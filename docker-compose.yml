@@ -1,0 +1,16 @@
+# One image, two processes sharing the SQLite file in a volume (WAL mode allows this).
+services:
+  api:
+    build: ./backend
+    restart: unless-stopped
+    ports: ["8000:8000"]
+    env_file: .env
+    volumes: ["macrovoice-data:/data"]
+  worker:
+    build: ./backend
+    restart: unless-stopped
+    command: ["python", "-m", "macrovoice.worker", "loop"]
+    env_file: .env
+    volumes: ["macrovoice-data:/data"]
+volumes:
+  macrovoice-data:
